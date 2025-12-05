@@ -3,18 +3,18 @@ const API_KEY = 'AIzaSyAioPdo89J5-nS1T4xpOpuA-HGE93YMkS0';
 const youtubers = [
     {
         name: "Felpo",
-        channelId: "UCgHmybParZzCheOSMQo7Iag", 
+        channelId: "UCgHmybParZzCheOSMQo7Iag",
         desc: "Programador mid e as vezes grava vídeos",
-        color: "from-white to-white",
+        color: "from-stone-950 to-stone-950",
         neonRgb: "0, 146, 184",
         image: "assets/felpo.png", 
         link: "https://www.youtube.com/@Felpozin"
     },
     {
-        name: "Kanfof",
-        channelId: "UCIjRLWVwvHQ_Lr7DcGTe5bw", 
+        name: "Kan",
+        channelId: "UCIjRLWVwvHQ_Lr7DcGTe5bw",
         desc: "lorem ipsum dolor sit amet.",
-        color: "from-white to-white",
+        color: "from-stone-950 to-stone-950",
         neonRgb: "255, 32, 86",
         image: "assets/kan.png",
         link: "https://www.youtube.com/@kanfof"
@@ -23,7 +23,7 @@ const youtubers = [
         name: "Bruth",
         channelId: "UCak2awiizUoGLu0psOcq8Xg",
         desc: "lorem ipsum dolor sit amet.",
-        color: "from-white to-white",
+        color: "from-stone-950 to-stone-950",
         neonRgb: "231, 0, 11",
         image: "assets/bruth.png",
         link: "https://www.youtube.com/@justmebruth"
@@ -32,7 +32,7 @@ const youtubers = [
         name: "Ivy",
         channelId: "",
         desc: "lorem ipsum dolor sit amet.",
-        color: "from-white to-white",
+        color: "from-stone-950 to-stone-950",
         neonRgb: "77, 23, 154",
         image: "assets/ivy.png",
         link: "#"
@@ -41,7 +41,7 @@ const youtubers = [
         name: "Poiro",
         channelId: "",
         desc: "lorem ipsum dolor sit amet.",
-        color: "from-white to-white",
+        color: "from-stone-950 to-stone-950",
         neonRgb: "159, 7, 18",
         image: "assets/davi.png",
         link: "#"
@@ -50,7 +50,7 @@ const youtubers = [
         name: "Lugurte",
         channelId: "UCvZ9jwy1crDEN-Hvr55o-KQ",
         desc: "lorem ipsum dolor sit amet.",
-        color: "from-white to-white",
+        color: "from-stone-950 to-stone-950",
         neonRgb: "236, 72, 153",
         image: "assets/lugurte.png",
         link: "https://www.youtube.com/@oilugurte"
@@ -59,7 +59,7 @@ const youtubers = [
         name: "Didito",
         channelId: "UCHzcJRIHSBbratHpCg8b8lw",
         desc: "lorem ipsum dolor sit amet.",
-        color: "from-white to-white",
+        color: "from-stone-950 to-stone-950",
         neonRgb: "68, 63, 209",
         image: "assets/didito.png",
         link: "https://www.youtube.com/@diditohut"
@@ -68,7 +68,7 @@ const youtubers = [
         name: "Finn",
         channelId: "",
         desc: "lorem ipsum dolor sit amet.",
-        color: "from-white to-white",
+        color: "from-stone-950 to-stone-950",
         neonRgb: "177, 170, 134",
         image: "assets/finn.png",
         link: "#"
@@ -76,8 +76,8 @@ const youtubers = [
     {
         name: "Gabu",
         channelId: "",
-        desc: "lorem ipsum dolor sit amet.",
-        color: "from-white to-white",
+        desc: "Animador e ilustrador.",
+        color: "from-stone-950 to-stone-950",
         neonRgb: "38, 28, 23",
         image: "assets/gabu.png",
         link: "#"
@@ -95,7 +95,6 @@ function formatSubscribers(count) {
 }
 
 async function fetchYouTubeStats(channelId, element) {
-    
     if (!channelId || channelId.trim() === "") {
         element.innerText = "Sem Canal";
         return;
@@ -111,7 +110,6 @@ async function fetchYouTubeStats(channelId, element) {
 
         if (data.items && data.items.length > 0) {
             const stats = data.items[0].statistics;
-            
             const subs = stats.hiddenSubscriberCount ? 0 : Number(stats.subscriberCount);
 
             if (subs === 0) {
@@ -124,7 +122,7 @@ async function fetchYouTubeStats(channelId, element) {
         }
 
     } catch (error) {
-        console.error("Erro ou Cota Excedida:", error);
+        console.error(error);
         element.innerText = "Offline"; 
     }
 }
@@ -134,13 +132,13 @@ youtubers.forEach(yt => {
     
     cardWrapper.className = `
         card-neon-wrapper group relative w-full h-full rounded-3xl 
-        z-0 cursor-pointer
+        z-0
     `;
     
     cardWrapper.style.setProperty('--neon-rgb', yt.neonRgb);
 
     cardWrapper.innerHTML = `
-        <div class="relative w-full h-full rounded-3xl overflow-hidden bg-[#121212] ring-1 ring-white/10">
+        <div class="relative w-full h-full rounded-3xl overflow-hidden bg-[#121212] ring-1 ring-white/10 transition-transform duration-300">
             <div class="absolute inset-0 w-full h-full">
                 <img src="${yt.image}" alt="${yt.name}" 
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
@@ -156,7 +154,7 @@ youtubers.forEach(yt => {
                     Carregando...
                 </span>
 
-                <h2 class="text-3xl font-black text-white mb-1 drop-shadow-md group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r ${yt.color} transition-all">
+                <h2 class="text-3xl font-black text-white mb-1 drop-shadow-md transition-all">
                     ${yt.name}
                 </h2>
 
@@ -182,3 +180,38 @@ youtubers.forEach(yt => {
 });
 
 lucide.createIcons();
+
+if (typeof Sortable !== 'undefined') {
+    const el = document.getElementById('card-container');
+    
+    if (Sortable.prototype.hasOwnProperty('mount') && typeof Sortable.mount === 'function') {
+    }
+
+    new Sortable(el, {
+        swap: true, 
+        swapClass: 'highlight-swap', 
+        animation: 150, 
+        
+        forceFallback: true, 
+        fallbackTolerance: 3, 
+        
+        ghostClass: 'sortable-ghost', 
+        dragClass: 'sortable-drag',   
+        
+        delay: 100, 
+        delayOnTouchOnly: true,
+        
+        onStart: function (evt) {
+            document.body.classList.add('is-dragging', 'select-none', 'cursor-grabbing');
+            
+            const cards = document.querySelectorAll('.card-neon-wrapper');
+            cards.forEach(card => card.classList.remove('group'));
+        },
+        onEnd: function (evt) {
+            document.body.classList.remove('is-dragging', 'select-none', 'cursor-grabbing');
+            
+            const cards = document.querySelectorAll('.card-neon-wrapper');
+            cards.forEach(card => card.classList.add('group'));
+        },
+    });
+}

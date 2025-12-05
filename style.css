@@ -4,16 +4,39 @@ body {
 }
 
 .card-neon-wrapper {
-    --neon-rgb: 0, 0, 0; 
-    
-    transition: all 0.5s ease-out;
+    --neon-rgb: 255, 255, 255;
+    transition: box-shadow 0.3s ease-out;
     box-shadow: 0 0 0px rgba(0,0,0,0);
+    background-color: #09090b; 
+    cursor: grab;
+    border-radius: 1.5rem;
+    touch-action: none; 
 }
 
 .card-neon-wrapper:hover {
     box-shadow: 0 0 35px -5px rgba(var(--neon-rgb), 0.8), 
                 0 0 15px -3px rgba(var(--neon-rgb), 0.5);
-                
-    transform: translateY(-0.75rem); 
     z-index: 10;
+    transform: translateY(-0.75rem); 
+}
+
+.card-neon-wrapper:active {
+    cursor: grabbing;
+}
+
+.sortable-ghost {
+    opacity: 0 !important; 
+}
+
+.sortable-drag {
+    opacity: 1 !important;
+    background: transparent;
+    cursor: grabbing !important;
+    z-index: 9999 !important;
+}
+
+.sortable-drag > div {
+    transform: scale(1.05) rotate(2deg); 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+    filter: grayscale(0%) !important; 
 }
