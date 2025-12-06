@@ -159,6 +159,8 @@ async function fetchYouTubeStats(channelId, element) {
 function openModal(yt) {
     if (document.body.classList.contains('is-dragging')) return;
 
+    document.body.style.overflow = 'hidden';
+
     const socialButtonsHtml = yt.socials.map(social => {
         let iconHtml;
 
@@ -230,6 +232,7 @@ window.closeModal = function() {
     setTimeout(() => {
         modal.classList.add('hidden');
         modalBody.innerHTML = ''; 
+        document.body.style.overflow = '';
     }, 300);
 }
 
@@ -324,7 +327,7 @@ if (typeof Sortable !== 'undefined') {
         
         delay: 200, 
         delayOnTouchOnly: true,
-        touchStartThreshold: 3,
+        touchStartThreshold: 5, 
         
         onStart: function (evt) {
             document.body.classList.add('is-dragging', 'select-none', 'cursor-grabbing');
