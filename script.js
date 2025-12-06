@@ -8,16 +8,22 @@ const youtubers = [
         color: "from-stone-950 to-stone-950",
         neonRgb: "0, 146, 184",
         image: "assets/felpo.png", 
-        link: "https://www.youtube.com/@Felpozin"
+        socials: [
+            { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@Felpozin" },
+            { name: "Twitter", icon: "twitter", url: "https://x.com/FelpoDev" },
+            { name: "GitHub", icon: "github", url: "https://github.com/Felpozin" }
+        ]
     },
     {
         name: "Kan",
         channelId: "UCIjRLWVwvHQ_Lr7DcGTe5bw",
-        desc: "lorem ipsum dolor sit amet.",
+        desc: "O cogumelo mais gostoso do Brasil.",
         color: "from-stone-950 to-stone-950",
         neonRgb: "255, 32, 86",
         image: "assets/kan.png",
-        link: "https://www.youtube.com/@kanfof"
+        socials: [
+            { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@kanfof" },
+        ]
     },
     {
         name: "Bruth",
@@ -26,34 +32,44 @@ const youtubers = [
         color: "from-stone-950 to-stone-950",
         neonRgb: "231, 0, 11",
         image: "assets/bruth.png",
-        link: "https://www.youtube.com/@justmebruth"
+        socials: [
+            { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@justmebruth" },
+            { name: "TikTok", icon: "tiktok", url: "https://www.tiktok.com/@justmebruth" }
+        ]
     },
     {
         name: "Ivy",
-        channelId: "",
+        channelId: "UCbHkPrppTdN2tH-PXuzf-fg",
         desc: "lorem ipsum dolor sit amet.",
         color: "from-stone-950 to-stone-950",
         neonRgb: "77, 23, 154",
         image: "assets/ivy.png",
-        link: "#"
+        socials: [
+            { name: "Youtube", icon: "youtube", url: "https://www.youtube.com/@MBForReal" }
+        ]
     },
     {
         name: "Poiro",
-        channelId: "",
-        desc: "lorem ipsum dolor sit amet.",
+        channelId: "UComZTK0yCIhyKkkAD9MRnAQ",
+        desc: "Poiro e seus amigos",
         color: "from-stone-950 to-stone-950",
         neonRgb: "159, 7, 18",
         image: "assets/davi.png",
-        link: "#"
+        socials: [
+            { name: "Youtube", icon: "youtube", url: "https://www.youtube.com/@poirobacana" }
+        ]
     },
     {
         name: "Lugurte",
         channelId: "UCvZ9jwy1crDEN-Hvr55o-KQ",
-        desc: "lorem ipsum dolor sit amet.",
+        desc: "Meninacraft",
         color: "from-stone-950 to-stone-950",
         neonRgb: "236, 72, 153",
         image: "assets/lugurte.png",
-        link: "https://www.youtube.com/@oilugurte"
+        socials: [
+            { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@oilugurte" },
+            { name: "Twitter", icon: "twitter", url: "https://x.com/lugurte" }
+        ]
     },
     {
         name: "Didito",
@@ -62,16 +78,18 @@ const youtubers = [
         color: "from-stone-950 to-stone-950",
         neonRgb: "68, 63, 209",
         image: "assets/didito.png",
-        link: "https://www.youtube.com/@diditohut"
+        socials: [
+            { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@diditohut" }
+        ]
     },
     {
         name: "Finn",
         channelId: "",
-        desc: "lorem ipsum dolor sit amet.",
+        desc: "_",
         color: "from-stone-950 to-stone-950",
         neonRgb: "177, 170, 134",
         image: "assets/finn.png",
-        link: "#"
+        socials: []
     },
     {
         name: "Gabu",
@@ -80,17 +98,23 @@ const youtubers = [
         color: "from-stone-950 to-stone-950",
         neonRgb: "38, 28, 23",
         image: "assets/gabu.png",
-        link: "#"
+        socials: [
+            { name: "Instagram", icon: "instagram", url: "https://www.instagram.com/zooonta/" },
+            { name: "Behance", icon: "behance", url: "https://www.behance.net/zooonta" }
+        ]
     }
 ];
 
 const container = document.getElementById('card-container');
+const modal = document.getElementById('profile-modal');
+const modalContent = document.getElementById('modal-content');
+const modalBody = document.getElementById('modal-body');
 
 function formatSubscribers(count) {
     if (count === null || count === undefined) return "---";
     return Intl.NumberFormat('en-US', {
         notation: "compact",
-        maximumFractionDigits: 1
+        maximumFractionDigits: 2
     }).format(count);
 }
 
@@ -127,6 +151,84 @@ async function fetchYouTubeStats(channelId, element) {
     }
 }
 
+function openModal(yt) {
+    if (document.body.classList.contains('is-dragging')) return;
+
+    const socialButtonsHtml = yt.socials.map(social => {
+        let iconHtml;
+
+        if (social.icon === 'tiktok') {
+            iconHtml = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                </svg>
+            `;
+        } else if (social.icon === 'behance') {
+            // Logo do Behance desenhado manualmente (preenchido)
+            iconHtml = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                    <path d="M6.2 7h2.5c2.3 0 3.6 1.3 3.6 3.4 0 1-.4 1.8-1.1 2.4.9.5 1.6 1.3 1.6 2.5 0 2.4-1.6 3.7-4 3.7H6.2V7zm2.4 4.5h.5c.8 0 1.2-.4 1.2-1.2s-.4-1.1-1.2-1.1h-.5v2.3zm0 5.2h.8c.9 0 1.4-.5 1.4-1.4 0-1-.5-1.5-1.4-1.5h-.8v2.9zM16.5 12h5.1c0-2.6-1.9-4.3-4.5-4.3-2.6 0-4.6 1.9-4.6 4.7s1.9 4.6 4.6 4.6c1.8 0 3.2-.8 3.9-2.2l-1.9-1c-.3.5-.9.9-1.9.9-1.2 0-2-.8-2.2-2.1h6v-.6zm-4-1.7c.1-1.1.9-1.9 2-1.9 1 0 1.9.8 1.9 1.9h-3.9zM17.5 6h4v1.5h-4V6z"/>
+                </svg>
+            `;
+        } else {
+            iconHtml = `<i data-lucide="${social.icon}" class="w-5 h-5"></i>`;
+        }
+
+        return `
+        <a href="${social.url}" target="_blank" 
+           class="flex items-center gap-3 w-full p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group/btn">
+            <div class="p-2 rounded-full bg-white/5 text-[rgb(${yt.neonRgb})] group-hover/btn:bg-[rgba(${yt.neonRgb},0.2)] transition-colors">
+                ${iconHtml}
+            </div>
+            <span class="font-bold tracking-wide text-[rgb(${yt.neonRgb})]">${social.name}</span>
+            <i data-lucide="external-link" class="w-4 h-4 ml-auto text-white/30 group-hover/btn:text-white transition-colors"></i>
+        </a>
+        `;
+    }).join('');
+
+    const noSocialsHtml = `<div class="text-white/40 text-center py-4">Nenhuma rede social informada.</div>`;
+
+    modalBody.innerHTML = `
+        <div class="relative h-48 w-full overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-[rgb(${yt.neonRgb})] to-[#121212] opacity-40"></div>
+            <img src="${yt.image}" class="w-full h-full object-cover opacity-60 mask-image-b">
+        </div>
+        
+        <div class="px-8 pb-8 -mt-12 relative z-10">
+            <div class="flex flex-col items-center text-center">
+                <div class="w-24 h-24 rounded-full p-1 bg-[#121212] shadow-2xl mb-4">
+                    <img src="${yt.image}" class="w-full h-full rounded-full object-cover border-2 border-[rgb(${yt.neonRgb})]">
+                </div>
+                
+                <h2 class="text-3xl font-black text-white mb-2">${yt.name}</h2>
+                <p class="text-gray-400 text-sm mb-6 max-w-xs leading-relaxed">${yt.desc}</p>
+                
+                <div class="w-full grid grid-cols-1 gap-3">
+                    ${yt.socials.length > 0 ? socialButtonsHtml : noSocialsHtml}
+                </div>
+            </div>
+        </div>
+    `;
+
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        modalContent.classList.remove('scale-95', 'opacity-0');
+        modalContent.classList.add('scale-100', 'opacity-100');
+    }, 10);
+    
+    lucide.createIcons();
+}
+
+window.closeModal = function() {
+    modalContent.classList.remove('scale-100', 'opacity-100');
+    modalContent.classList.add('scale-95', 'opacity-0');
+    
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        modalBody.innerHTML = ''; 
+    }, 300);
+}
+
 youtubers.forEach(yt => {
     const cardWrapper = document.createElement('div');
     
@@ -136,6 +238,10 @@ youtubers.forEach(yt => {
     `;
     
     cardWrapper.style.setProperty('--neon-rgb', yt.neonRgb);
+
+    cardWrapper.addEventListener('click', (e) => {
+        openModal(yt);
+    });
 
     cardWrapper.innerHTML = `
         <div class="relative w-full h-full rounded-3xl overflow-hidden bg-[#121212] ring-1 ring-white/10 transition-transform duration-300">
@@ -164,9 +270,8 @@ youtubers.forEach(yt => {
                             ${yt.desc}
                         </p>
                         
-                        <a href="${yt.link}" target="_blank" class="mt-5 inline-flex items-center gap-2 text-white/80 hover:text-white font-semibold text-sm transition-all duration-300 opacity-0 group-hover:opacity-100 delay-300">
-                            Acessar Canal <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                        <div class="mt-4 flex items-center gap-2 text-[rgb(${yt.neonRgb})] text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all delay-300">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -184,9 +289,6 @@ lucide.createIcons();
 if (typeof Sortable !== 'undefined') {
     const el = document.getElementById('card-container');
     
-    if (Sortable.prototype.hasOwnProperty('mount') && typeof Sortable.mount === 'function') {
-    }
-
     new Sortable(el, {
         swap: true, 
         swapClass: 'highlight-swap', 
@@ -208,7 +310,9 @@ if (typeof Sortable !== 'undefined') {
             cards.forEach(card => card.classList.remove('group'));
         },
         onEnd: function (evt) {
-            document.body.classList.remove('is-dragging', 'select-none', 'cursor-grabbing');
+            setTimeout(() => {
+                document.body.classList.remove('is-dragging', 'select-none', 'cursor-grabbing');
+            }, 100);
             
             const cards = document.querySelectorAll('.card-neon-wrapper');
             cards.forEach(card => card.classList.add('group'));

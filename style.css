@@ -8,7 +8,7 @@ body {
     transition: box-shadow 0.3s ease-out;
     box-shadow: 0 0 0px rgba(0,0,0,0);
     background-color: #09090b; 
-    cursor: grab;
+    cursor: pointer;
     border-radius: 1.5rem;
     touch-action: none; 
 }
@@ -39,4 +39,9 @@ body {
     transform: scale(1.05) rotate(2deg); 
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
     filter: grayscale(0%) !important; 
+}
+
+.mask-image-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
