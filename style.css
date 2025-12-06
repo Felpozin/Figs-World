@@ -10,7 +10,9 @@ body {
     background-color: #09090b; 
     cursor: pointer;
     border-radius: 1.5rem;
-    touch-action: pan-y;
+    
+    touch-action: pan-y !important; 
+    
     -webkit-tap-highlight-color: transparent;
 }
 

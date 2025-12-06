@@ -325,7 +325,7 @@ if (typeof Sortable !== 'undefined') {
         ghostClass: 'sortable-ghost', 
         dragClass: 'sortable-drag',   
         
-        delay: 200, 
+        delay: 300, 
         delayOnTouchOnly: true,
         touchStartThreshold: 5, 
         
