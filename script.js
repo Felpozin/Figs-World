@@ -10,8 +10,8 @@ const youtubers = [
         image: "assets/felpo.png", 
         socials: [
             { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@Felpozin" },
-            { name: "Twitter", icon: "twitter", url: "#" },
-            { name: "GitHub", icon: "github", url: "#" }
+            { name: "Twitter", icon: "twitter", url: "https://x.com/FelpoDev" },
+            { name: "GitHub", icon: "github", url: "https://github.com/Felpozin" }
         ]
     },
     {
@@ -23,7 +23,6 @@ const youtubers = [
         image: "assets/kan.png",
         socials: [
             { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@kanfof" },
-            { name: "Instagram", icon: "instagram", url: "#" }
         ]
     },
     {
@@ -35,42 +34,41 @@ const youtubers = [
         image: "assets/bruth.png",
         socials: [
             { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@justmebruth" },
-            { name: "TikTok", icon: "tiktok", url: "#" },
-            { name: "Twitch", icon: "twitch", url: "#" }
+            { name: "TikTok", icon: "tiktok", url: "https://www.tiktok.com/@justmebruth" },
         ]
     },
     {
         name: "Ivy",
-        channelId: "",
+        channelId: "UCbHkPrppTdN2tH-PXuzf-fg",
         desc: "lorem ipsum dolor sit amet.",
         color: "from-stone-950 to-stone-950",
         neonRgb: "77, 23, 154",
         image: "assets/ivy.png",
         socials: [
-            { name: "Instagram", icon: "instagram", url: "#" }
+            { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@MBForReal" },
         ]
     },
     {
         name: "Poiro",
-        channelId: "",
-        desc: "lorem ipsum dolor sit amet.",
+        channelId: "UComZTK0yCIhyKkkAD9MRnAQ",
+        desc: "Poiro e seus amigos",
         color: "from-stone-950 to-stone-950",
         neonRgb: "159, 7, 18",
         image: "assets/davi.png",
         socials: [
-            { name: "Twitter", icon: "twitter", url: "#" }
+            { name: "Youtube", icon: "youtube", url: "https://www.youtube.com/@poirobacana" }
         ]
     },
     {
         name: "Lugurte",
         channelId: "UCvZ9jwy1crDEN-Hvr55o-KQ",
-        desc: "lorem ipsum dolor sit amet.",
+        desc: "Meninacraft",
         color: "from-stone-950 to-stone-950",
         neonRgb: "236, 72, 153",
         image: "assets/lugurte.png",
         socials: [
             { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@oilugurte" },
-            { name: "Twitter", icon: "twitter", url: "#" }
+            { name: "Twitter", icon: "twitter", url: "https://x.com/lugurte" }
         ]
     },
     {
@@ -87,7 +85,7 @@ const youtubers = [
     {
         name: "Finn",
         channelId: "",
-        desc: "lorem ipsum dolor sit amet.",
+        desc: "_",
         color: "from-stone-950 to-stone-950",
         neonRgb: "177, 170, 134",
         image: "assets/finn.png",
@@ -101,9 +99,8 @@ const youtubers = [
         neonRgb: "38, 28, 23",
         image: "assets/gabu.png",
         socials: [
-            { name: "Instagram", icon: "instagram", url: "#" },
-            { name: "ArtStation", icon: "monitor", url: "#" },
-            { name: "Behance", icon: "behance", url: "#" }
+            { name: "Instagram", icon: "instagram", url: "https://www.instagram.com/zooonta/" },
+            { name: "Behance", icon: "behance", url: "https://www.behance.net/zooonta" }
         ]
     }
 ];
