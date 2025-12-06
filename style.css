@@ -10,7 +10,8 @@ body {
     background-color: #09090b; 
     cursor: pointer;
     border-radius: 1.5rem;
-    touch-action: none; 
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .card-neon-wrapper:hover {

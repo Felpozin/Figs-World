@@ -10,8 +10,8 @@ const youtubers = [
         image: "assets/felpo.png", 
         socials: [
             { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@Felpozin" },
-            { name: "Twitter", icon: "twitter", url: "https://x.com/FelpoDev" },
-            { name: "GitHub", icon: "github", url: "https://github.com/Felpozin" }
+            { name: "Twitter", icon: "twitter", url: "#" },
+            { name: "GitHub", icon: "github", url: "#" }
         ]
     },
     {
@@ -23,6 +23,7 @@ const youtubers = [
         image: "assets/kan.png",
         socials: [
             { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@kanfof" },
+            { name: "Instagram", icon: "instagram", url: "#" }
         ]
     },
     {
@@ -34,41 +35,42 @@ const youtubers = [
         image: "assets/bruth.png",
         socials: [
             { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@justmebruth" },
-            { name: "TikTok", icon: "tiktok", url: "https://www.tiktok.com/@justmebruth" }
+            { name: "TikTok", icon: "tiktok", url: "#" },
+            { name: "Twitch", icon: "twitch", url: "#" }
         ]
     },
     {
         name: "Ivy",
-        channelId: "UCbHkPrppTdN2tH-PXuzf-fg",
+        channelId: "",
         desc: "lorem ipsum dolor sit amet.",
         color: "from-stone-950 to-stone-950",
         neonRgb: "77, 23, 154",
         image: "assets/ivy.png",
         socials: [
-            { name: "Youtube", icon: "youtube", url: "https://www.youtube.com/@MBForReal" }
+            { name: "Instagram", icon: "instagram", url: "#" }
         ]
     },
     {
         name: "Poiro",
-        channelId: "UComZTK0yCIhyKkkAD9MRnAQ",
-        desc: "Poiro e seus amigos",
+        channelId: "",
+        desc: "lorem ipsum dolor sit amet.",
         color: "from-stone-950 to-stone-950",
         neonRgb: "159, 7, 18",
         image: "assets/davi.png",
         socials: [
-            { name: "Youtube", icon: "youtube", url: "https://www.youtube.com/@poirobacana" }
+            { name: "Twitter", icon: "twitter", url: "#" }
         ]
     },
     {
         name: "Lugurte",
         channelId: "UCvZ9jwy1crDEN-Hvr55o-KQ",
-        desc: "Meninacraft",
+        desc: "lorem ipsum dolor sit amet.",
         color: "from-stone-950 to-stone-950",
         neonRgb: "236, 72, 153",
         image: "assets/lugurte.png",
         socials: [
             { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@oilugurte" },
-            { name: "Twitter", icon: "twitter", url: "https://x.com/lugurte" }
+            { name: "Twitter", icon: "twitter", url: "#" }
         ]
     },
     {
@@ -85,7 +87,7 @@ const youtubers = [
     {
         name: "Finn",
         channelId: "",
-        desc: "_",
+        desc: "lorem ipsum dolor sit amet.",
         color: "from-stone-950 to-stone-950",
         neonRgb: "177, 170, 134",
         image: "assets/finn.png",
@@ -99,8 +101,9 @@ const youtubers = [
         neonRgb: "38, 28, 23",
         image: "assets/gabu.png",
         socials: [
-            { name: "Instagram", icon: "instagram", url: "https://www.instagram.com/zooonta/" },
-            { name: "Behance", icon: "behance", url: "https://www.behance.net/zooonta" }
+            { name: "Instagram", icon: "instagram", url: "#" },
+            { name: "ArtStation", icon: "monitor", url: "#" },
+            { name: "Behance", icon: "behance", url: "#" }
         ]
     }
 ];
@@ -110,11 +113,13 @@ const modal = document.getElementById('profile-modal');
 const modalContent = document.getElementById('modal-content');
 const modalBody = document.getElementById('modal-body');
 
+let activeMobileCard = null;
+
 function formatSubscribers(count) {
     if (count === null || count === undefined) return "---";
     return Intl.NumberFormat('en-US', {
         notation: "compact",
-        maximumFractionDigits: 2
+        maximumFractionDigits: 1
     }).format(count);
 }
 
@@ -164,7 +169,6 @@ function openModal(yt) {
                 </svg>
             `;
         } else if (social.icon === 'behance') {
-            // Logo do Behance desenhado manualmente (preenchido)
             iconHtml = `
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                     <path d="M6.2 7h2.5c2.3 0 3.6 1.3 3.6 3.4 0 1-.4 1.8-1.1 2.4.9.5 1.6 1.3 1.6 2.5 0 2.4-1.6 3.7-4 3.7H6.2V7zm2.4 4.5h.5c.8 0 1.2-.4 1.2-1.2s-.4-1.1-1.2-1.1h-.5v2.3zm0 5.2h.8c.9 0 1.4-.5 1.4-1.4 0-1-.5-1.5-1.4-1.5h-.8v2.9zM16.5 12h5.1c0-2.6-1.9-4.3-4.5-4.3-2.6 0-4.6 1.9-4.6 4.7s1.9 4.6 4.6 4.6c1.8 0 3.2-.8 3.9-2.2l-1.9-1c-.3.5-.9.9-1.9.9-1.2 0-2-.8-2.2-2.1h6v-.6zm-4-1.7c.1-1.1.9-1.9 2-1.9 1 0 1.9.8 1.9 1.9h-3.9zM17.5 6h4v1.5h-4V6z"/>
@@ -229,6 +233,12 @@ window.closeModal = function() {
     }, 300);
 }
 
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.card-neon-wrapper')) {
+        activeMobileCard = null;
+    }
+});
+
 youtubers.forEach(yt => {
     const cardWrapper = document.createElement('div');
     
@@ -240,7 +250,18 @@ youtubers.forEach(yt => {
     cardWrapper.style.setProperty('--neon-rgb', yt.neonRgb);
 
     cardWrapper.addEventListener('click', (e) => {
-        openModal(yt);
+        const isMobile = window.matchMedia("(pointer: coarse)").matches;
+        
+        if (isMobile) {
+            if (activeMobileCard === yt.name) {
+                openModal(yt);
+                activeMobileCard = null;
+            } else {
+                activeMobileCard = yt.name;
+            }
+        } else {
+            openModal(yt);
+        }
     });
 
     cardWrapper.innerHTML = `
@@ -271,6 +292,7 @@ youtubers.forEach(yt => {
                         </p>
                         
                         <div class="mt-4 flex items-center gap-2 text-[rgb(${yt.neonRgb})] text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all delay-300">
+                            <i data-lucide="mouse-pointer-2" class="w-4 h-4"></i> Clique para ver redes
                         </div>
                     </div>
                 </div>
@@ -300,8 +322,9 @@ if (typeof Sortable !== 'undefined') {
         ghostClass: 'sortable-ghost', 
         dragClass: 'sortable-drag',   
         
-        delay: 100, 
+        delay: 200, 
         delayOnTouchOnly: true,
+        touchStartThreshold: 3,
         
         onStart: function (evt) {
             document.body.classList.add('is-dragging', 'select-none', 'cursor-grabbing');
