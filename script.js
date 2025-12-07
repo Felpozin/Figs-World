@@ -68,7 +68,9 @@ const youtubers = [
         image: "assets/lugurte.png",
         socials: [
             { name: "YouTube", icon: "youtube", url: "https://www.youtube.com/@oilugurte" },
-            { name: "Twitter", icon: "twitter", url: "https://x.com/lugurte" }
+            { name: "Twitter", icon: "twitter", url: "https://x.com/lugurte" },
+            { name: "Instagram", icon: "instagram", url: "https://www.instagram.com/oilugurte/" },
+            { name: "TikTok", icon: "tiktok", url: "https://www.tiktok.com/@lugurte" },
         ]
     },
     {
